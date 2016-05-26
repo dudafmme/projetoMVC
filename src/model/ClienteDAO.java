@@ -20,7 +20,7 @@ public class ClienteDAO {
         Connection con;
         Class.forName("com.mysql.jdbc.Driver");//testa o driver
         // pega a conexão
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/concessionaria", "user", "pass");
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/concessionaria", "root", "root");
         return con;
     }
     
@@ -52,5 +52,23 @@ public class ClienteDAO {
         stmt = conexao.createStatement();
         rs = stmt.executeQuery("SELECT * FROM clientes");
         return rs;
+    }
+
+    public void alterarDadosCliente(Cliente cliente, String nomeBusca) throws ClassNotFoundException, SQLException {
+        conexao = getConnection();//estabelece a conexao
+        stmt = conexao.createStatement();
+        String sql;
+        
+        sql = "UPDATE clientes SET "
+                + "nome = '" + cliente.getNome() + "', "
+                + "cpf = '" + cliente.getCpf() + "', "
+                + "renda = " + cliente.getRenda() + ", "
+                + "ativo = " + cliente.isAtivo() 
+                + " WHERE nome = '" + nomeBusca + "'";
+        
+        if(stmt.executeUpdate(sql) > 0)
+            JOptionPane.showMessageDialog(null, "Dados Atualizados com sucesso");
+        else
+            JOptionPane.showMessageDialog(null, "Não foi possível atualizar os dados do cliente");
     }
 }//fim da classe

@@ -19,6 +19,7 @@ import model.Cliente;
  */
 public class FrameCliente extends javax.swing.JInternalFrame {
 
+    private String nomeBusca;
     /**
      * Creates new form FrameCliente
      */
@@ -52,6 +53,7 @@ public class FrameCliente extends javax.swing.JInternalFrame {
         btVoltar = new javax.swing.JButton();
         btBuscar = new javax.swing.JButton();
         btListar = new javax.swing.JButton();
+        btAlterar = new javax.swing.JButton();
 
         setTitle("Cadastro De Cliente");
 
@@ -150,6 +152,13 @@ public class FrameCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        btAlterar.setText("Alterar");
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -160,7 +169,9 @@ public class FrameCliente extends javax.swing.JInternalFrame {
                 .addComponent(btBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btListar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btAlterar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(btVoltar)
                 .addContainerGap())
         );
@@ -172,7 +183,8 @@ public class FrameCliente extends javax.swing.JInternalFrame {
                     .addComponent(btGravar)
                     .addComponent(btVoltar)
                     .addComponent(btBuscar)
-                    .addComponent(btListar))
+                    .addComponent(btListar)
+                    .addComponent(btAlterar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -230,6 +242,8 @@ public class FrameCliente extends javax.swing.JInternalFrame {
         ControleCliente cCliente = new ControleCliente();
         try {
             rs = cCliente.buscarCliente(tfNome.getText()); 
+            nomeBusca = tfNome.getText();
+            
             ftfCPF.setText(rs.getString(2));
             ftfRenda.setText(rs.getString(3));
             rbSim.setSelected(rs.getBoolean(4));
@@ -262,8 +276,30 @@ public class FrameCliente extends javax.swing.JInternalFrame {
 //        add(listCliente, JLayeredPane.DEFAULT_LAYER);
     }//GEN-LAST:event_btListarActionPerformed
 
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        // TODO add your handling code here:
+        
+        Cliente cliente = new Cliente();
+        ControleCliente cCliente = new ControleCliente();
+        
+        //objeto cliente com os dados já alterados
+        cliente.setNome(tfNome.getText());
+        cliente.setCpf(ftfCPF.getText());
+        cliente.setRenda(Float.parseFloat(ftfRenda.getText()));
+        cliente.setAtivo(rbSim.isSelected());
+        
+        try {
+            cCliente.receberClienteAtualizar(cliente, nomeBusca);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btAlterarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAlterar;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btGravar;
     private javax.swing.JButton btListar;

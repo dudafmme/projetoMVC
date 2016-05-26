@@ -45,5 +45,12 @@ public class ControleCliente {
         }
         return listagemClientes;
     }
+
+    public void receberClienteAtualizar(Cliente cliente, String nomeBusca) throws ClassNotFoundException, SQLException {
+        ClienteDAO cliDAO = new ClienteDAO();
+        
+        cliDAO.alterarDadosCliente(cliente, nomeBusca);
+
+    }
     
 }//fim da classe
