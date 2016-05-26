@@ -53,4 +53,9 @@ public class ControleCliente {
 
     }
     
+    public void receberClienteExcluir(String nome) throws SQLException, ClassNotFoundException{
+        ClienteDAO clienteExcluirDAO = new ClienteDAO();
+        clienteExcluirDAO.excuirCliente(nome);
+    }
+    
 }//fim da classe

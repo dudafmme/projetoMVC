@@ -54,6 +54,8 @@ public class FrameCliente extends javax.swing.JInternalFrame {
         btBuscar = new javax.swing.JButton();
         btListar = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
+        btExcluir = new javax.swing.JButton();
+        btLimpar = new javax.swing.JButton();
 
         setTitle("Cadastro De Cliente");
 
@@ -97,7 +99,7 @@ public class FrameCliente extends javax.swing.JInternalFrame {
                                 .addComponent(rbSim)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rbNao)))))
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,6 +161,20 @@ public class FrameCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        btExcluir.setText("Excluir");
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirActionPerformed(evt);
+            }
+        });
+
+        btLimpar.setText("Limpar");
+        btLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -171,7 +187,11 @@ public class FrameCliente extends javax.swing.JInternalFrame {
                 .addComponent(btListar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btAlterar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btExcluir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btLimpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btVoltar)
                 .addContainerGap())
         );
@@ -184,7 +204,9 @@ public class FrameCliente extends javax.swing.JInternalFrame {
                     .addComponent(btVoltar)
                     .addComponent(btBuscar)
                     .addComponent(btListar)
-                    .addComponent(btAlterar))
+                    .addComponent(btAlterar)
+                    .addComponent(btExcluir)
+                    .addComponent(btLimpar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -297,11 +319,31 @@ public class FrameCliente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btAlterarActionPerformed
 
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        // TODO add your handling code here:
+        ControleCliente cCliente = new ControleCliente();
+        try {
+            cCliente.receberClienteExcluir(tfNome.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(FrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        limparCamposFrame();
+    }//GEN-LAST:event_btExcluirActionPerformed
+
+    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
+        // TODO add your handling code here:
+        limparCamposFrame();
+    }//GEN-LAST:event_btLimparActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btBuscar;
+    private javax.swing.JButton btExcluir;
     private javax.swing.JButton btGravar;
+    private javax.swing.JButton btLimpar;
     private javax.swing.JButton btListar;
     private javax.swing.JButton btVoltar;
     private javax.swing.JFormattedTextField ftfCPF;

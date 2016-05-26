@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import static javax.swing.UIManager.get;
 
 /**
  *
@@ -70,5 +71,17 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "Dados Atualizados com sucesso");
         else
             JOptionPane.showMessageDialog(null, "Não foi possível atualizar os dados do cliente");
+    }
+    
+    //Método para excluir cliente
+    public void excuirCliente(String nome) throws SQLException, ClassNotFoundException{
+        conexao = getConnection();
+        stmt = conexao.createStatement();
+        String sql;
+        sql = "DELETE FROM clientes WHERE nome = '" + nome + "'";
+        if(stmt.executeUpdate(sql) > 0)
+            JOptionPane.showMessageDialog(null, "Cliente Excluido com sucesso!");
+        else
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado para exclusão!");
     }
 }//fim da classe
